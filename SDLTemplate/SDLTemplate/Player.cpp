@@ -67,7 +67,6 @@ void Player::update()
 		Bullet* bullet = new Bullet(x + width, y - 3 + height / 2, 1, 0, 10);
 		bullets.push_back(bullet);
 		getScene()->addGameObject(bullet);
-		bullet->start();
 
 		currentReloadTime = reloadTime;
 	}
@@ -81,8 +80,6 @@ void Player::update()
 		bullets.push_back(bullet2);
 		getScene()->addGameObject(bullet1);
 		getScene()->addGameObject(bullet2);
-		bullet1->start();
-		bullet2->start();
 
 		currentSpecReloadTime = specReloadTime;
 	}
