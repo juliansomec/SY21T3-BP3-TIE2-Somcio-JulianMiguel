@@ -6,6 +6,7 @@
 #include "Bullet.h"
 #include <vector>
 #include "util.h"
+#include "Player.h"
 
 class Enemy : public GameObject
 {
@@ -15,9 +16,11 @@ public:
 	void start();
 	void update();
 	void draw();
+	void setPlayerTarget(Player* player);
 private:
 	SDL_Texture* texture;
 	Mix_Chunk* sound;
+	Player* playerTarget;
 	int x;
 	int y;
 	float dirX;

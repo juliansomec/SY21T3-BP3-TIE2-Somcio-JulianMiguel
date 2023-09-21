@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "Scene.h"
 
 Enemy::Enemy()
 {
@@ -41,9 +42,30 @@ void Enemy::update()
 		dirY = -dirY;
 		currentDirectionChangeTime = directionChangeTime;
 	}
+
+	if (currentReloadTime > 0) currentReloadTime--;
+
+	if (currentReloadTime == 0)
+	{
+		float dx = -1;
+		float dy = 0;
+
+		calcSlope(playerTarget->getPosX(), playerTarget->getPosY(), x, y, &dx, &dy);
+		SoundManager::playSound(sound);
+		Bullet* bullet = new Bullet(x + width, y - 3 + height / 2, dx, dy, 10);
+		bullets.push_back(bullet);
+		getScene()->addGameObject(bullet);
+
+		currentReloadTime = reloadTime;
+	}
 }
 
 void Enemy::draw()
 {
 	blit(texture, x, y);
+}
+
+void Enemy::setPlayerTarget(Player* player)
+{
+	playerTarget = player;
 }

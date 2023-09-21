@@ -102,4 +102,14 @@ void Player::draw()
 	blit(texture, x, y);
 }
 
+int Player::getPosX()
+{
+	return x;
+}
+
+int Player::getPosY()
+{
+	return y;
+}
+
 
