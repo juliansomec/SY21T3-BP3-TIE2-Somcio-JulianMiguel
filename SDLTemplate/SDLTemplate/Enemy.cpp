@@ -58,6 +58,18 @@ void Enemy::update()
 
 		currentReloadTime = reloadTime;
 	}
+
+	for (int i = 0; i < bullets.size(); i++)
+	{
+		if (bullets[i]->getPosX() < 0)
+		{
+			Bullet* bulletToErase = bullets[i];
+			bullets.erase(bullets.begin() + i);
+			delete bulletToErase;
+
+			break;
+		}
+	}
 }
 
 void Enemy::draw()
