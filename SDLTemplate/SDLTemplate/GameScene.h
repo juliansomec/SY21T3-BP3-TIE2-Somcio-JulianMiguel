@@ -19,5 +19,7 @@ private:
 	float spawnTime;
 	float currentSpawnTimer;
 	std::vector<Enemy*> spawnedEnemies;
+
+	void spawn();
 };
 

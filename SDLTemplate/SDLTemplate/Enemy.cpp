@@ -15,8 +15,6 @@ void Enemy::start()
 
 	dirX = -1;
 	dirY = 1;
-	x = 1000;
-	y = 300;
 	width = 0;
 	height = 0;
 	speed = 2;
@@ -77,7 +75,18 @@ void Enemy::draw()
 	blit(texture, x, y);
 }
 
+float Enemy::getPosX()
+{
+	return x;
+}
+
 void Enemy::setPlayerTarget(Player* player)
 {
 	playerTarget = player;
+}
+
+void Enemy::setPosition(int xPos, int yPos)
+{
+	this->x = xPos;
+	this->y = yPos;
 }

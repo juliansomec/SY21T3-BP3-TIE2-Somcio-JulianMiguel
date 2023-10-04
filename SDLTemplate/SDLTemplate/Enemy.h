@@ -16,8 +16,9 @@ public:
 	void start();
 	void update();
 	void draw();
+	float getPosX();
 	void setPlayerTarget(Player* player);
-private:
+	void setPosition(int xPos, int yPos);
 	SDL_Texture* texture;
 	Mix_Chunk* sound;
 	Player* playerTarget;

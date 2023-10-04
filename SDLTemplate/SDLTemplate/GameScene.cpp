@@ -6,17 +6,6 @@ GameScene::GameScene()
 	player = new Player();
 	this->addGameObject(player);
 
-	currentSpawnTimer = 300;
-	spawnTime = 300;
-
-	for (int i = 0; i < 3; i++)
-	{
-		Enemy* enemy = new Enemy();
-		this->addGameObject(enemy);
-		enemy->setPlayerTarget(player);
-
-		spawnedEnemies.push_back(enemy);
-	}
 }
 
 GameScene::~GameScene()
@@ -28,6 +17,14 @@ void GameScene::start()
 {
 	Scene::start();
 	// Initialize any scene logic here
+
+	currentSpawnTimer = 300;
+	spawnTime = 300;
+
+	for (int i = 0; i < 3; i++)
+	{
+		spawn();
+	}
 }
 
 void GameScene::draw()
@@ -38,4 +35,37 @@ void GameScene::draw()
 void GameScene::update()
 {
 	Scene::update();
+
+	if (currentSpawnTimer > 0) currentSpawnTimer--;
+
+	if (currentSpawnTimer <= 0)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			spawn();
+		}
+		currentSpawnTimer = spawnTime;
+	}
+}
+
+void GameScene::spawn()
+{
+	Enemy* enemy = new Enemy();
+	this->addGameObject(enemy);
+	enemy->setPlayerTarget(player);
+
+	enemy->setPosition(1300, 300 + (rand() % 300));
+	spawnedEnemies.push_back(enemy);
+
+	for (int i = 0; i < spawnedEnemies.size(); i++)
+	{
+		if (spawnedEnemies[i]->getPosX() > SCREEN_WIDTH)
+		{
+			Enemy* enemiesToErase = spawnedEnemies[i];
+			spawnedEnemies.erase(spawnedEnemies.begin() + i);
+			delete enemiesToErase;
+
+			break;
+		}
+	}
 }
