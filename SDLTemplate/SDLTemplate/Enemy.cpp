@@ -81,6 +81,21 @@ int Enemy::getPosX()
 	return x;
 }
 
+int Enemy::getPosY()
+{
+	return y;
+}
+
+int Enemy::getWidth()
+{
+	return width;
+}
+
+int Enemy::getHeight()
+{
+	return height;
+}
+
 void Enemy::setPlayerTarget(Player* player)
 {
 	playerTarget = player;

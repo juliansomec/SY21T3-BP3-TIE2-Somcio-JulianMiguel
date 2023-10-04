@@ -49,13 +49,27 @@ void GameScene::update()
 
 	for (int i = 0; i < spawnedEnemies.size(); i++)
 	{
-		if (spawnedEnemies[i]->getPosX() < -100)
+		if (spawnedEnemies[i]->getPosX() < -70)
 		{
 			Enemy* enemiesToErase = spawnedEnemies[i];
 			spawnedEnemies.erase(spawnedEnemies.begin() + i);
 			delete enemiesToErase;
 
 			break;
+		}
+	}
+
+	for (int i = 0; i < objects.size(); i++)
+	{
+		Bullet* bullet = dynamic_cast<Bullet*>(objects[i]);
+
+		if (bullet->getSide() == Side::ENEMY_SIDE)
+		{
+
+		}
+		if (bullet->getSide() == Side::PLAYER_SIDE)
+		{
+
 		}
 	}
 }

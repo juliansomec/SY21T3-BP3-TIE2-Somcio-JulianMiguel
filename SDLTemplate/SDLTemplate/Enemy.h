@@ -24,8 +24,8 @@ public:
 
 	int getPosX();
 	int getPosY();
-	float getWidth();
-	float getHeight();
+	int getWidth();
+	int getHeight();
 	int x;
 	int y;
 	float dirX;

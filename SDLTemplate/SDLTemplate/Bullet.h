@@ -16,10 +16,10 @@ public:
 	void start();
 	void update();
 	void draw();
-	float getPosX();
-	float getPosY();
-	float getWidth();
-	float getHeight();
+	int getPosX();
+	int getPosY();
+	int getWidth();
+	int getHeight();
 	Side getSide();
 private:
 	SDL_Texture* texture;

@@ -30,22 +30,22 @@ void Bullet::draw()
 	blit(texture, x, y);
 }
 
-float Bullet::getPosX()
+int Bullet::getPosX()
 {
 	return x;
 }
 
-float Bullet::getPosY()
+int Bullet::getPosY()
 {
 	return y;
 }
 
-float Bullet::getWidth()
+int Bullet::getWidth()
 {
 	return width;
 }
 
-float Bullet::getHeight()
+int Bullet::getHeight()
 {
 	return height;
 }
