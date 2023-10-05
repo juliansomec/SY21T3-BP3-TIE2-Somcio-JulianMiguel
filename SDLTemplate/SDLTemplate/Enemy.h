@@ -16,12 +16,16 @@ public:
 	void start();
 	void update();
 	void draw();
-	float getPosX();
 	void setPlayerTarget(Player* player);
 	void setPosition(int xPos, int yPos);
 	SDL_Texture* texture;
 	Mix_Chunk* sound;
 	Player* playerTarget;
+
+	int getPosX();
+	int getPosY();
+	float getWidth();
+	float getHeight();
 	int x;
 	int y;
 	float dirX;
