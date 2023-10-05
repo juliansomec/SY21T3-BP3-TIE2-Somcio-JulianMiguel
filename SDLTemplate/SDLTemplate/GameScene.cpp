@@ -46,6 +46,18 @@ void GameScene::update()
 		}
 		currentSpawnTimer = spawnTime;
 	}
+
+	for (int i = 0; i < spawnedEnemies.size(); i++)
+	{
+		if (spawnedEnemies[i]->getPosX() < -100)
+		{
+			Enemy* enemiesToErase = spawnedEnemies[i];
+			spawnedEnemies.erase(spawnedEnemies.begin() + i);
+			delete enemiesToErase;
+
+			break;
+		}
+	}
 }
 
 void GameScene::spawn()
@@ -56,16 +68,4 @@ void GameScene::spawn()
 
 	enemy->setPosition(1300, 300 + (rand() % 300));
 	spawnedEnemies.push_back(enemy);
-
-	for (int i = 0; i < spawnedEnemies.size(); i++)
-	{
-		if (spawnedEnemies[i]->getPosX() > SCREEN_WIDTH)
-		{
-			Enemy* enemiesToErase = spawnedEnemies[i];
-			spawnedEnemies.erase(spawnedEnemies.begin() + i);
-			delete enemiesToErase;
-
-			break;
-		}
-	}
 }
