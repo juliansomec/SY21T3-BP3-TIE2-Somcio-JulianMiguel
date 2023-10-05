@@ -1,12 +1,13 @@
 #include "Bullet.h"
 
-Bullet::Bullet(float posX, float posY, float dirX, float dirY, float speed)
+Bullet::Bullet(float posX, float posY, float dirX, float dirY, float speed, Side side)
 {
 	this->x = posX;
 	this->y = posY;
 	this->directionX = dirX;
 	this->directionY = dirY;
 	this->speed = speed;
+	this->side = side;
 }
 
 void Bullet::start()
@@ -47,4 +48,9 @@ float Bullet::getWidth()
 float Bullet::getHeight()
 {
 	return height;
+}
+
+Side Bullet::getSide()
+{
+	return side;
 }

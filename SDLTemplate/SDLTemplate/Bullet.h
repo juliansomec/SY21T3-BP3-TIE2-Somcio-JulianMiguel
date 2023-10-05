@@ -3,10 +3,16 @@
 #include "common.h"
 #include "draw.h"
 
+enum class Side
+{
+	PLAYER_SIDE,
+	ENEMY_SIDE
+};
+
 class Bullet : public GameObject
 {
 public:
-	Bullet(float posX, float posY, float dirX, float dirY, float speed);
+	Bullet(float posX, float posY, float dirX, float dirY, float speed, Side side);
 	void start();
 	void update();
 	void draw();
@@ -14,8 +20,10 @@ public:
 	float getPosY();
 	float getWidth();
 	float getHeight();
+	Side getSide();
 private:
 	SDL_Texture* texture;
+	Side side;
 	int x;
 	int y;
 	int width;

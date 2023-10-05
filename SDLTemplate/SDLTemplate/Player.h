@@ -16,6 +16,8 @@ public:
 
 	int getPosX();
 	int getPosY();
+	float getWidth();
+	float getHeight();
 private:
 	SDL_Texture* texture;
 	Mix_Chunk* sound;

@@ -64,7 +64,7 @@ void Player::update()
 	if (app.keyboard[SDL_SCANCODE_F] && currentReloadTime == 0)
 	{
 		SoundManager::playSound(sound);
-		Bullet* bullet = new Bullet(x + width, y - 3 + height / 2, 1, 0, 10);
+		Bullet* bullet = new Bullet(x + width, y - 3 + height / 2, 1, 0, 10, Side::PLAYER_SIDE);
 		bullets.push_back(bullet);
 		getScene()->addGameObject(bullet);
 
@@ -74,8 +74,8 @@ void Player::update()
 	if (app.keyboard[SDL_SCANCODE_G] && currentSpecReloadTime == 0)
 	{
 		SoundManager::playSound(sound);
-		Bullet* bullet1 = new Bullet(x, y, 1, 0, 10);
-		Bullet* bullet2 = new Bullet(x, y - 5 + height, 1, 0, 10);
+		Bullet* bullet1 = new Bullet(x, y, 1, 0, 10, Side::PLAYER_SIDE);
+		Bullet* bullet2 = new Bullet(x, y - 5 + height, 1, 0, 10, Side::PLAYER_SIDE);
 		bullets.push_back(bullet1);
 		bullets.push_back(bullet2);
 		getScene()->addGameObject(bullet1);
