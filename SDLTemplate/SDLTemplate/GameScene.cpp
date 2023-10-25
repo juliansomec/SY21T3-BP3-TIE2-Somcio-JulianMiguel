@@ -65,7 +65,16 @@ void GameScene::update()
 
 		if (bullet->getSide() == Side::ENEMY_SIDE)
 		{
+			int collision = checkCollision(
+				player->getPosX(), player->getPosY(), player->getWidth(), player->getHeight(),
+				bullet->getPosX(), bullet->getPosY(), bullet->getWidth(), bullet->getHeight()
+				);
 
+			if (collision == 1)
+			{
+				std::cout << "Player has been hit!" << std::endl;
+				break;
+			}
 		}
 		if (bullet->getSide() == Side::PLAYER_SIDE)
 		{

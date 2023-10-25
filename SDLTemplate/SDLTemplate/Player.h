@@ -4,7 +4,7 @@
 #include "draw.h"
 #include "SoundManager.h"
 #include "Bullet.h"
-#include <vector>
+#include <vector>  
 
 class Player : public GameObject
 {
@@ -16,8 +16,8 @@ public:
 
 	int getPosX();
 	int getPosY();
-	float getWidth();
-	float getHeight();
+	int getWidth();
+	int getHeight();
 private:
 	SDL_Texture* texture;
 	Mix_Chunk* sound;

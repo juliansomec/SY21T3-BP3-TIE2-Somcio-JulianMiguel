@@ -112,4 +112,14 @@ int Player::getPosY()
 	return y;
 }
 
+int Player::getWidth()
+{
+	return width;
+}
+
+int Player::getHeight()
+{
+	return height;
+}
+
 
