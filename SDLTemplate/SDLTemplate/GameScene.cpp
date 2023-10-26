@@ -6,6 +6,7 @@ GameScene::GameScene()
 	player = new Player();
 	this->addGameObject(player);
 
+	
 }
 
 GameScene::~GameScene()
@@ -18,6 +19,7 @@ void GameScene::start()
 	Scene::start();
 	// Initialize any scene logic here
 
+	initFonts();
 	currentSpawnTimer = 300;
 	spawnTime = 300;
 
@@ -30,12 +32,20 @@ void GameScene::start()
 void GameScene::draw()
 {
 	Scene::draw();
+
+	drawText(110, 20, 255, 255, 255, TEXT_CENTER, "POINTS:");
 }
 
 void GameScene::update()
 {
 	Scene::update();
 
+	spawnLogic();
+	collisionLogic();
+}
+
+void GameScene::spawnLogic()
+{
 	if (currentSpawnTimer > 0) currentSpawnTimer--;
 
 	if (currentSpawnTimer <= 0)
@@ -58,27 +68,50 @@ void GameScene::update()
 			break;
 		}
 	}
+}
 
+void GameScene::collisionLogic()
+{
 	for (int i = 0; i < objects.size(); i++)
 	{
 		Bullet* bullet = dynamic_cast<Bullet*>(objects[i]);
 
-		if (bullet->getSide() == Side::ENEMY_SIDE)
+		if (bullet != NULL)
 		{
-			int collision = checkCollision(
-				player->getPosX(), player->getPosY(), player->getWidth(), player->getHeight(),
-				bullet->getPosX(), bullet->getPosY(), bullet->getWidth(), bullet->getHeight()
+			if (bullet->getSide() == Side::ENEMY_SIDE)
+			{
+				int collision = checkCollision(
+					player->getPosX(), player->getPosY(), player->getWidth(), player->getHeight(),
+					bullet->getPosX(), bullet->getPosY(), bullet->getWidth(), bullet->getHeight()
 				);
 
-			if (collision == 1)
-			{
-				std::cout << "Player has been hit!" << std::endl;
-				break;
+				if (collision == 1)
+				{
+					player->doDeath();
+					break;
+				}
 			}
-		}
-		if (bullet->getSide() == Side::PLAYER_SIDE)
-		{
+			if (bullet->getSide() == Side::PLAYER_SIDE)
+			{
+				for (int i = 0; i < spawnedEnemies.size(); i++)
+				{
+					Enemy* currentEnemy = spawnedEnemies[i];
 
+					int collision = checkCollision(
+						currentEnemy->getPosX(), currentEnemy->getPosY(), currentEnemy->getWidth(), currentEnemy->getHeight(),
+						bullet->getPosX(), bullet->getPosY(), bullet->getWidth(), bullet->getHeight()
+					);
+
+					if (collision == 1)
+					{
+						despawnEnemy(currentEnemy);
+						// only despawn one at a time
+						// otherwise we might crash due to looping while deleting a null pointer
+						break;
+					}
+				}
+
+			}
 		}
 	}
 }
@@ -91,4 +124,23 @@ void GameScene::spawn()
 
 	enemy->setPosition(1300, 300 + (rand() % 300));
 	spawnedEnemies.push_back(enemy);
+}
+
+void GameScene::despawnEnemy(Enemy* enemy)
+{
+	int index = -1;
+	for (int i = 0; i < spawnedEnemies.size(); i++)
+	{
+		if (enemy == spawnedEnemies[i])
+		{
+			index = i;
+			break;
+		}
+	}
+
+	if (index != -1)
+	{
+		spawnedEnemies.erase(spawnedEnemies.begin() + index);
+		delete enemy;
+	}
 }

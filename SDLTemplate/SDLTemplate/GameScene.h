@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include <vector>
+#include "text.h"
 
 class GameScene : public Scene
 {
@@ -21,5 +22,8 @@ private:
 	std::vector<Enemy*> spawnedEnemies;
 
 	void spawn();
+	void despawnEnemy(Enemy* enemy);
+	void spawnLogic();
+	void collisionLogic();
 };
 

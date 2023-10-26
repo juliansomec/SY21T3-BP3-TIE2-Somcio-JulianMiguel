@@ -61,3 +61,4 @@ Side Bullet::getSide()
 {
 	return side;
 }
+

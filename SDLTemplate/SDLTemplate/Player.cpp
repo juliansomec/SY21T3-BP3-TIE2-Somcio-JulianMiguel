@@ -23,6 +23,8 @@ void Player::start()
 	speed = mainSpeed;
 	reloadTime = 8;
 	specReloadTime = 25;
+	currentReloadTime = 0;
+	isAlive = true;
 
 	SDL_QueryTexture(texture, NULL, NULL, &width, &height);
 
@@ -31,6 +33,19 @@ void Player::start()
 
 void Player::update()
 {
+	for (int i = 0; i < bullets.size(); i++)
+	{
+		if (bullets[i]->getPosX() > SCREEN_WIDTH)
+		{
+			Bullet* bulletToErase = bullets[i];
+			bullets.erase(bullets.begin() + i);
+			delete bulletToErase;
+
+			break;
+		}
+	}
+
+	if (!isAlive) return;
 
 	if (app.keyboard[SDL_SCANCODE_LSHIFT])
 	{
@@ -84,21 +99,12 @@ void Player::update()
 		currentSpecReloadTime = specReloadTime;
 	}
 
-	for (int i = 0; i < bullets.size(); i++)
-	{
-		if (bullets[i]->getPosX() > SCREEN_WIDTH)
-		{
-			Bullet* bulletToErase = bullets[i];
-			bullets.erase(bullets.begin() + i);
-			delete bulletToErase;
-
-			break;
-		}
-	}
+	
 }
 
 void Player::draw()
 {
+	if (!isAlive) return;
 	blit(texture, x, y);
 }
 
@@ -120,6 +126,16 @@ int Player::getWidth()
 int Player::getHeight()
 {
 	return height;
+}
+
+bool Player::getIsAlive()
+{
+	return isAlive;
+}
+
+void Player::doDeath()
+{
+	isAlive = false;
 }
 
 
