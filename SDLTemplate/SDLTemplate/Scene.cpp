@@ -58,6 +58,8 @@ void Scene::update()
 
 void Scene::draw()
 {
+	blit(texture, 0, 0);
+	blitScale(texture, 0, 0, &width, &height, 3);
 	for (int i = 0; i < objects.size(); i++)
 	{
 		objects[i]->draw();
@@ -66,6 +68,9 @@ void Scene::draw()
 
 void Scene::start()
 {
+	height = 0;
+	width = 0;
+	texture = loadTexture("gfx/background.png");
 	for (int i = 0; i < objects.size(); i++)
 	{
 		objects[i]->start();

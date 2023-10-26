@@ -6,7 +6,7 @@ GameScene::GameScene()
 	player = new Player();
 	this->addGameObject(player);
 
-	
+	points = 0;
 }
 
 GameScene::~GameScene()
@@ -17,11 +17,15 @@ GameScene::~GameScene()
 void GameScene::start()
 {
 	Scene::start();
+	
 	// Initialize any scene logic here
 
+	SDL_QueryTexture(texture, NULL, NULL, &width, &height);
 	initFonts();
 	currentSpawnTimer = 300;
 	spawnTime = 300;
+	explodeTimer = 25;
+	currentExplodeTimer = 25;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -33,7 +37,13 @@ void GameScene::draw()
 {
 	Scene::draw();
 
-	drawText(110, 20, 255, 255, 255, TEXT_CENTER, "POINTS:");
+	blit(texture, 1920, 1080);
+	drawText(110, 20, 255, 255, 255, TEXT_CENTER, "POINTS: %03d", points);
+
+	if (!player->getIsAlive())
+	{
+		drawText(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 255, 255, 255, TEXT_CENTER, "GAME OVER!");
+	}
 }
 
 void GameScene::update()
@@ -105,12 +115,12 @@ void GameScene::collisionLogic()
 					if (collision == 1)
 					{
 						despawnEnemy(currentEnemy);
+						points++;
 						// only despawn one at a time
 						// otherwise we might crash due to looping while deleting a null pointer
 						break;
 					}
 				}
-
 			}
 		}
 	}
@@ -140,7 +150,18 @@ void GameScene::despawnEnemy(Enemy* enemy)
 
 	if (index != -1)
 	{
-		spawnedEnemies.erase(spawnedEnemies.begin() + index);
-		delete enemy;
+		if (currentExplodeTimer > 0) currentExplodeTimer--;
+
+		if (currentExplodeTimer <= 0)
+		{
+			texture = loadTexture("gfx/explosion.png");
+			currentExplodeTimer = explodeTimer;
+		}
+
+		if (currentExplodeTimer >= currentExplodeTimer)
+		{
+			spawnedEnemies.erase(spawnedEnemies.begin() + index);
+			delete enemy;
+		}	
 	}
 }

@@ -19,11 +19,19 @@ private:
 
 	float spawnTime;
 	float currentSpawnTimer;
+	float explodeTimer;
+	float currentExplodeTimer;
 	std::vector<Enemy*> spawnedEnemies;
 
 	void spawn();
 	void despawnEnemy(Enemy* enemy);
 	void spawnLogic();
 	void collisionLogic();
+	void explode();
+
+	int points;
+	int height;
+	int width;
+	SDL_Texture* texture;
 };
 

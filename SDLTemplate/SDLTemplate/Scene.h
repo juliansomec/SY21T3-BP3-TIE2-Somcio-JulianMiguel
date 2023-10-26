@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "app.h"
+#include "draw.h"
 #include <algorithm>
 
 extern App app;
@@ -27,5 +28,8 @@ protected:
 private:
 	bool hasStarted;
 	static Scene* activeScene;
+	SDL_Texture* texture;
+	int height;
+	int width;
 };
 
