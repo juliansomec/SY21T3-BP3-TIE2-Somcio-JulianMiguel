@@ -25,7 +25,9 @@ void GameScene::start()
 	currentSpawnTimer = 300;
 	spawnTime = 300;
 	explodeTimer = 11;
-	currentExplodeTimer = 5;
+	currentExplodeTimer = 11;
+	pSpawnTimer = 1000;
+	pCurrentSpawnTimer = 1000;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -52,6 +54,7 @@ void GameScene::update()
 
 	spawnLogic();
 	collisionLogic();
+	powerUpLogic();
 }
 
 void GameScene::spawnLogic()
@@ -162,3 +165,37 @@ void GameScene::despawnEnemy(Enemy* enemy)
 		delete enemy;
 	}
 }
+
+void GameScene::spawnPowerUp()
+{
+	PowerUp* powerUp = new PowerUp();
+	this->addGameObject(powerUp);
+	
+	powerUp->setPosition(300 + (rand() %300), 300 + (rand() % 300));
+	spawnedPowerUps.push_back(powerUp);
+}
+
+void GameScene::powerUpLogic()
+{
+	if (pCurrentSpawnTimer > 0) pCurrentSpawnTimer--;
+
+	if (pCurrentSpawnTimer <= 0)
+	{
+		for (int i = 0; i < 1; i++)
+		{
+			spawnPowerUp();
+		}
+		pCurrentSpawnTimer = pSpawnTimer;
+	}
+}
+
+
+//Notes:
+//Make game vertical
+//Adjust bullets to be deleted if it hits an enemy
+//Fix explosion to disappear after appearing for a few frames
+//Spawn power ups on the lower half of the screen for the player every few frames
+//Add the power up feature
+//Add boss after a few waves of enemies
+//Allow it to shoot bullets in a pattern
+//Will die after a few hits
