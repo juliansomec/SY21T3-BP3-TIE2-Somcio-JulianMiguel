@@ -27,7 +27,7 @@ private:
 	void despawnEnemy(Enemy* enemy);
 	void spawnLogic();
 	void collisionLogic();
-	void explode();
+	void explode(Enemy* enemy);
 
 	int points;
 	int height;

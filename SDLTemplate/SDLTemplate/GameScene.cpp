@@ -24,8 +24,8 @@ void GameScene::start()
 	initFonts();
 	currentSpawnTimer = 300;
 	spawnTime = 300;
-	explodeTimer = 25;
-	currentExplodeTimer = 25;
+	explodeTimer = 11;
+	currentExplodeTimer = 5;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -114,7 +114,15 @@ void GameScene::collisionLogic()
 
 					if (collision == 1)
 					{
-						despawnEnemy(currentEnemy);
+						currentEnemy->explodeState();
+
+						if (currentExplodeTimer > 0) currentExplodeTimer--;
+
+						if (currentExplodeTimer <= 0)
+						{
+							despawnEnemy(currentEnemy);
+							currentExplodeTimer = explodeTimer;
+						}
 						points++;
 						// only despawn one at a time
 						// otherwise we might crash due to looping while deleting a null pointer
@@ -150,18 +158,7 @@ void GameScene::despawnEnemy(Enemy* enemy)
 
 	if (index != -1)
 	{
-		if (currentExplodeTimer > 0) currentExplodeTimer--;
-
-		if (currentExplodeTimer <= 0)
-		{
-			texture = loadTexture("gfx/explosion.png");
-			currentExplodeTimer = explodeTimer;
-		}
-
-		if (currentExplodeTimer >= currentExplodeTimer)
-		{
-			spawnedEnemies.erase(spawnedEnemies.begin() + index);
-			delete enemy;
-		}	
+		spawnedEnemies.erase(spawnedEnemies.begin() + index);
+		delete enemy;
 	}
 }

@@ -22,6 +22,7 @@ public:
 	int getPosY();
 	int getWidth();
 	int getHeight();
+	void explodeState();
 
 private:
 	SDL_Texture* texture;
@@ -39,5 +40,6 @@ private:
 	float directionChangeTime;
 	float currentDirectionChangeTime;
 	std::vector<Bullet*> bullets;
+	bool isAlive;
 };
 

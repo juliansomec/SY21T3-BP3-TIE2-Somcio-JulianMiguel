@@ -35,6 +35,7 @@ void Player::update()
 {
 	for (int i = 0; i < bullets.size(); i++)
 	{
+
 		if (bullets[i]->getPosX() > SCREEN_WIDTH)
 		{
 			Bullet* bulletToErase = bullets[i];

@@ -22,6 +22,7 @@ void Enemy::start()
 	currentReloadTime = 0;
 	directionChangeTime = (rand() % 300) + 180;
 	currentDirectionChangeTime = 0;
+	isAlive = true;
 
 	SDL_QueryTexture(texture, NULL, NULL, &width, &height);
 
@@ -31,6 +32,7 @@ void Enemy::start()
 
 void Enemy::update()
 {
+	if (!isAlive) return;
 	x += dirX * speed;
 	y += dirY * speed;
 
@@ -43,7 +45,7 @@ void Enemy::update()
 	}
 
 	if (currentReloadTime > 0) currentReloadTime--;
-
+	
 	if (currentReloadTime == 0)
 	{
 		float dx = -1;
@@ -94,6 +96,13 @@ int Enemy::getWidth()
 int Enemy::getHeight()
 {
 	return height;
+}
+
+void Enemy::explodeState()
+{
+	this->texture = loadTexture("gfx/explosion.png");
+	this->speed = 0;
+	this->isAlive = false;
 }
 
 void Enemy::setPlayerTarget(Player* player)
