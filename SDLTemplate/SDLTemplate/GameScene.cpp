@@ -40,7 +40,7 @@ void GameScene::draw()
 	Scene::draw();
 
 	blit(texture, 1920, 1080);
-	drawText(110, 20, 255, 255, 255, TEXT_CENTER, "POINTS: %03d", points);
+	drawText(110, 120, 255, 255, 255, TEXT_CENTER, "POINTS: %03d", points);
 
 	if (!player->getIsAlive())
 	{
@@ -143,7 +143,7 @@ void GameScene::spawn()
 	this->addGameObject(enemy);
 	enemy->setPlayerTarget(player);
 
-	enemy->setPosition(1300, 300 + (rand() % 300));
+	enemy->setPosition(0 + (rand() % 720), 0);
 	spawnedEnemies.push_back(enemy);
 }
 
@@ -171,7 +171,7 @@ void GameScene::spawnPowerUp()
 	PowerUp* powerUp = new PowerUp();
 	this->addGameObject(powerUp);
 	
-	powerUp->setPosition(300 + (rand() %300), 300 + (rand() % 300));
+	powerUp->setPosition(1 + (rand() %300), 300 + (rand() % 300));
 	spawnedPowerUps.push_back(powerUp);
 }
 

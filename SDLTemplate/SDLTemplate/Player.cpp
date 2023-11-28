@@ -16,8 +16,8 @@ void Player::start()
 {
 	texture = loadTexture("gfx/player.png");
 
-	x = 100;
-	y = 100;
+	x = 325;
+	y = 1000;
 	width = 0;
 	height = 0;
 	speed = mainSpeed;
@@ -36,12 +36,12 @@ void Player::update()
 	for (int i = 0; i < bullets.size(); i++)
 	{
 
-		if (bullets[i]->getPosX() > SCREEN_WIDTH)
+		if (bullets[i]->getPosY() < 0)
 		{
 			Bullet* bulletToErase = bullets[i];
 			bullets.erase(bullets.begin() + i);
 			delete bulletToErase;
-
+			std::cout << "Bullet deleted" << std::endl;
 			break;
 		}
 	}
@@ -80,7 +80,7 @@ void Player::update()
 	if (app.keyboard[SDL_SCANCODE_F] && currentReloadTime == 0)
 	{
 		SoundManager::playSound(sound);
-		Bullet* bullet = new Bullet(x + width, y - 3 + height / 2, 1, 0, 10, Side::PLAYER_SIDE);
+		Bullet* bullet = new Bullet(x, y, 0, -1, 10, Side::PLAYER_SIDE);
 		bullets.push_back(bullet);
 		getScene()->addGameObject(bullet);
 
@@ -90,8 +90,8 @@ void Player::update()
 	if (app.keyboard[SDL_SCANCODE_G] && currentSpecReloadTime == 0)
 	{
 		SoundManager::playSound(sound);
-		Bullet* bullet1 = new Bullet(x, y, 1, 0, 10, Side::PLAYER_SIDE);
-		Bullet* bullet2 = new Bullet(x, y - 5 + height, 1, 0, 10, Side::PLAYER_SIDE);
+		Bullet* bullet1 = new Bullet(x, y, 0, -1, 10, Side::PLAYER_SIDE);
+		Bullet* bullet2 = new Bullet(x, y - 5 + height, 0, -1, 10, Side::PLAYER_SIDE);
 		bullets.push_back(bullet1);
 		bullets.push_back(bullet2);
 		getScene()->addGameObject(bullet1);
