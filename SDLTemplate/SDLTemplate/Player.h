@@ -20,6 +20,7 @@ public:
 	int getHeight();
 	bool getIsAlive();
 	void doDeath();
+	void collectPowerUps();
 private:
 	SDL_Texture* texture;
 	Mix_Chunk* sound;
@@ -34,5 +35,7 @@ private:
 	float currentSpecReloadTime;
 	std::vector<Bullet*> bullets;
 	bool isAlive;
+
+	int currentPowerUps;
 };
 

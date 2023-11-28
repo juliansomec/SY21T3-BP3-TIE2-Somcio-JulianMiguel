@@ -30,10 +30,12 @@ void PowerUp::setPosition(int xPos, int yPos)
 	this->y = yPos;
 }
 
-void PowerUp::getPosX()
+int PowerUp::getPosX()
 {
+	return x;
 }
 
-void PowerUp::getPosY()
+int PowerUp::getPosY()
 {
+	return y;
 }

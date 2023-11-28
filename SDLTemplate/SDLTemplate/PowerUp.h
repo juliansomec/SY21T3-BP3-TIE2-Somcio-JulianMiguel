@@ -16,8 +16,8 @@ public:
 	void draw();
 	void update();
 	void setPosition(int xPos, int yPos);
-	void getPosX();
-	void getPosY();
+	int getPosX();
+	int getPosY();
 private:
 	SDL_Texture* texture;
 	Mix_Chunk* sound;

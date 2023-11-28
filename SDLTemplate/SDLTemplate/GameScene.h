@@ -34,7 +34,7 @@ private:
 
 	void spawnPowerUp();
 	void powerUpLogic();
-
+	void collectPowerUp(PowerUp* powerUp);
 
 	int points;
 	int height;

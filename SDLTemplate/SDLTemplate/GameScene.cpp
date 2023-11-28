@@ -26,8 +26,8 @@ void GameScene::start()
 	spawnTime = 300;
 	explodeTimer = 11;
 	currentExplodeTimer = 11;
-	pSpawnTimer = 1000;
-	pCurrentSpawnTimer = 1000;
+	pSpawnTimer = 600;
+	pCurrentSpawnTimer = 600;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -72,7 +72,7 @@ void GameScene::spawnLogic()
 
 	for (int i = 0; i < spawnedEnemies.size(); i++)
 	{
-		if (spawnedEnemies[i]->getPosX() < -70)
+		if (spawnedEnemies[i]->getPosY() > 1300)
 		{
 			Enemy* enemiesToErase = spawnedEnemies[i];
 			spawnedEnemies.erase(spawnedEnemies.begin() + i);
@@ -171,9 +171,11 @@ void GameScene::spawnPowerUp()
 	PowerUp* powerUp = new PowerUp();
 	this->addGameObject(powerUp);
 	
-	powerUp->setPosition(1 + (rand() %300), 300 + (rand() % 300));
+	powerUp->setPosition(rand() % 400 + 50, rand() % 600 + 500);
 	spawnedPowerUps.push_back(powerUp);
 }
+
+
 
 void GameScene::powerUpLogic()
 {
@@ -184,18 +186,49 @@ void GameScene::powerUpLogic()
 		for (int i = 0; i < 1; i++)
 		{
 			spawnPowerUp();
+			std::cout << "Spawned power up" << std::endl;
 		}
-		pCurrentSpawnTimer = pSpawnTimer;
+ 		pCurrentSpawnTimer = pSpawnTimer;
+	}
+
+	for (int i = 0; i < spawnedPowerUps.size(); i++)
+	{
+		PowerUp* powerUp = dynamic_cast<PowerUp*>(spawnedPowerUps[i]);
+
+		int collision = checkCollision(
+			player->getPosX(), player->getPosY(), player->getWidth(), player->getHeight(),
+			powerUp->getPosX(), powerUp->getPosY(), 3, 3
+		);
+
+		if (collision == 1)
+		{
+			collectPowerUp(powerUp);
+		}
+	}
+}
+
+void GameScene::collectPowerUp(PowerUp* powerUp)
+{
+	int index = -1;
+	for (int i = 0; i < spawnedPowerUps.size(); i++)
+	{
+		if (powerUp == spawnedPowerUps[i])
+		{
+			index = i;
+			break;
+		}
+	}
+
+	if (index != -1)
+	{
+		player->collectPowerUps();
+		spawnedPowerUps.erase(spawnedPowerUps.begin() + index);
+		delete powerUp;
 	}
 }
 
 
 //Notes:
-//Make game vertical
-//Adjust bullets to be deleted if it hits an enemy
-//Fix explosion to disappear after appearing for a few frames
-//Spawn power ups on the lower half of the screen for the player every few frames
-//Add the power up feature
 //Add boss after a few waves of enemies
 //Allow it to shoot bullets in a pattern
 //Will die after a few hits
