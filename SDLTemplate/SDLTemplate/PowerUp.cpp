@@ -10,6 +10,8 @@ PowerUp::~PowerUp()
 
 void PowerUp::start()
 {
+	dirY = 1;
+	speed = 2;
 	texture = loadTexture("gfx/Powerup.png");
 	SDL_QueryTexture(texture, NULL, NULL, &width, &height);
 }
@@ -21,7 +23,7 @@ void PowerUp::draw()
 
 void PowerUp::update()
 {
-
+	y += dirY * speed;
 }
 
 void PowerUp::setPosition(int xPos, int yPos)

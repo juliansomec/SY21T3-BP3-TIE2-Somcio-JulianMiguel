@@ -26,5 +26,7 @@ private:
 	int height;
 	int x;
 	int y;
+	int dirY;
+	int speed;
 };
 

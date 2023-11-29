@@ -42,7 +42,6 @@ void Player::update()
 			Bullet* bulletToErase = bullets[i];
 			bullets.erase(bullets.begin() + i);
 			delete bulletToErase;
-			std::cout << "Bullet deleted" << std::endl;
 			break;
 		}
 	}

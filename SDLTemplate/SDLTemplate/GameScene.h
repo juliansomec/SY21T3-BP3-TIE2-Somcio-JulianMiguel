@@ -6,6 +6,7 @@
 #include <vector>
 #include "text.h"
 #include "PowerUp.h"
+#include "Boss.h"
 
 class GameScene : public Scene
 {
@@ -26,11 +27,16 @@ private:
 	float pCurrentSpawnTimer;
 	std::vector<Enemy*> spawnedEnemies;
 	std::vector<PowerUp*> spawnedPowerUps;
+	std::vector<Boss*> spawnedBoss;
 
 	void spawn();
 	void despawnEnemy(Enemy* enemy);
 	void spawnLogic();
 	void collisionLogic();
+
+	void spawnBoss();
+	void bossCollision(Boss* boss);
+	bool bossSpawned;
 
 	void spawnPowerUp();
 	void powerUpLogic();
@@ -39,6 +45,7 @@ private:
 	int points;
 	int height;
 	int width;
+	int waveCount;
 	SDL_Texture* texture;
 };
 

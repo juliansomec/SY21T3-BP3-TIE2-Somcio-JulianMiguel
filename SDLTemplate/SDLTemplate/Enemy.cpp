@@ -62,7 +62,7 @@ void Enemy::update()
 
 	for (int i = 0; i < bullets.size(); i++)
 	{
-		if (bullets[i]->getPosX() < 0)
+		if (bullets[i]->getPosY() > 1300 || bullets[i]->getPosY() < 0)
 		{
 			Bullet* bulletToErase = bullets[i];
 			bullets.erase(bullets.begin() + i);
