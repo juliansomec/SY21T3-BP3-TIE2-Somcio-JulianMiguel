@@ -19,12 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Bricks.cpp" />
     <ClCompile Include="draw.cpp" />
+    <ClCompile Include="Environment.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="Goomba.cpp" />
     <ClCompile Include="init.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PowerUps.cpp" />
+    <ClCompile Include="QBlock.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="text.cpp" />
@@ -32,14 +39,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.h" />
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="Bricks.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="defs.h" />
     <ClInclude Include="draw.h" />
+    <ClInclude Include="Environment.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Goomba.h" />
     <ClInclude Include="init.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PowerUps.h" />
+    <ClInclude Include="QBlock.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="text.h" />
@@ -57,26 +71,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
